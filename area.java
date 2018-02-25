@@ -9,7 +9,6 @@ public class area {
                 System.out.println("Enter radius of the circle: ");
                 float radius = sn.nextFloat();
                 System.out.println("The area is " + 3.14*radius*radius);
-                System.out.println("The half of the area is " + 0.5*3.14*radius*radius);
                 sn.close();
         }
 
