@@ -17,10 +17,8 @@ public class Arithmetic extends Progression {
 	@Override
 	public double getTerm(int i){
 		double value = this.firstValue();
-		for (int j  = 0; j < i ; j++){
-			value += this.commonDifference;
-		}
-		return value;
+		double temp = (((double)i -1.0)*this.commonDifference);
+		return value + temp;
 		
 	}
 	
