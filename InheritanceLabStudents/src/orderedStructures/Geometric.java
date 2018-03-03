@@ -8,7 +8,7 @@ public class Geometric extends Progression {
 	
 	public Geometric(double firstValue, double commonFactor) { 
 		super(firstValue); 
-		this.commonFactor = commonFactor; 
+		this.commonFactor = commonFactor;
 	}
 	
 	@Override
@@ -31,6 +31,10 @@ public class Geometric extends Progression {
 
 		return value*cF;
 
+	}
+
+	public boolean equals(Geometric p){
+		return (this.commonFactor == p.commonFactor && this.firstValue() == p.firstValue());
 	}
 
 }
