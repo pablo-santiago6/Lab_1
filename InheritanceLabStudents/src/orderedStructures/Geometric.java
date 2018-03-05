@@ -1,4 +1,6 @@
 package orderedStructures;
+import java.lang.Math;
+
 
 public class Geometric extends Progression {
 
@@ -6,7 +8,7 @@ public class Geometric extends Progression {
 	
 	public Geometric(double firstValue, double commonFactor) { 
 		super(firstValue); 
-		this.commonFactor = commonFactor; 
+		this.commonFactor = commonFactor;
 	}
 	
 	@Override
@@ -23,14 +25,16 @@ public class Geometric extends Progression {
 	
 	@Override
 	public double getTerm(int i){
-		int q = 1;
 		double value = this.firstValue();
-		while(q < i){
-			value = value*this.commonFactor;
-			q++;
-		}
-		return value;
+		double exp =(double)( i - 1);
+		double cF = Math.pow(this.commonFactor , exp);
 
+		return value*cF;
+
+	}
+
+	public boolean equals(Geometric p){
+		return (this.commonFactor == p.commonFactor && this.firstValue() == p.firstValue());
 	}
 
 }

@@ -1,14 +1,24 @@
 package orderedStructures;
 
-public class Arithmetic extends Progression {
+public class Arithmetic extends Progression implements Combinable {
 	private double commonDifference; 
 	
 	public Arithmetic(double firstValue, double commonDifference) { 
 		super(firstValue); 
 		this.commonDifference = commonDifference; 
 	}
-	
-	@Override
+
+
+    public Arithmetic add(Arithmetic a) {
+        return new Arithmetic(a.firstValue()+this.firstValue(),+ a.commonDifference+this.commonDifference);
+    }
+
+
+    public Arithmetic substract(Arithmetic a, Arithmetic b) {
+        return null;
+    }
+
+    @Override
 	public double nextValue() {
 		current = current + commonDifference; 
 		return current;
@@ -17,10 +27,8 @@ public class Arithmetic extends Progression {
 	@Override
 	public double getTerm(int i){
 		double value = this.firstValue();
-		for (int j  = 0; j < i ; j++){
-			value += this.commonDifference;
-		}
-		return value;
+		double temp = (((double)i -1.0)*this.commonDifference);
+		return value + temp;
 		
 	}
 	
@@ -29,5 +37,11 @@ public class Arithmetic extends Progression {
 		return "Arith(" + (int)this.firstValue() + "," + (int)this.commonDifference + ")";
 		
 	}
+	
+	public boolean equals(Arithmetic p){
+		return (this.commonDifference == p.commonDifference && this.firstValue() == p.firstValue());
+	}
+
+
 
 }
