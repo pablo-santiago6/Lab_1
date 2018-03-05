@@ -17,11 +17,19 @@ public class ArrayIndexList<E> implements IndexList<E> {
 
 	public void add(int index, E e) throws IndexOutOfBoundsException {
 		// ADD CODE AS REQUESTED BY EXERCISES
+		if(index < 0 || index > this.size())throw new IndexOutOfBoundsException("bruh");
+		
+		moveDataOnePositionTR(index,size);
+		element[index] = e;
+		size++;
 	}
 
 
 	public void add(E e) {
-		// ADD CODE AS REQUESTED BY EXERCISES
+		if(size + 1 > element.length){ changeCapacity(element.length); }
+		
+		element[size] = e;  
+		size++;
 	}
 
 
@@ -37,8 +45,11 @@ public class ArrayIndexList<E> implements IndexList<E> {
 
 
 	public E remove(int index) throws IndexOutOfBoundsException {
-		// ADD AND MODIFY CODE AS REQUESTED BY EXERCISES
-		return null;
+		if(index < 0 || index > this.size())throw new IndexOutOfBoundsException("bruh");
+		E temp = element[index];
+		moveDataOnePositionTL(index,size);
+		size--;
+		return temp;
 	}
 
 
