@@ -16,12 +16,14 @@ public class ArrayIndexList<E> implements IndexList<E> {
 	
 
 	public void add(int index, E e) throws IndexOutOfBoundsException {
-		// ADD CODE AS REQUESTED BY EXERCISES
-		if(index < 0 || index > this.size())throw new IndexOutOfBoundsException("bruh");
+		if(!isValid(index,size)) { throw new IndexOutOfBoundsException("Index out of bounds!!"); }
 		
 		moveDataOnePositionTR(index,size);
 		element[index] = e;
+		System.out.println("Here is "+ element[index]);
 		size++;
+		
+		
 	}
 
 
@@ -34,8 +36,7 @@ public class ArrayIndexList<E> implements IndexList<E> {
 
 
 	public E get(int index) throws IndexOutOfBoundsException {
-		// ADD AND MODIGY CODE AS REQUESTED BY EXERCISES
-		return null; 
+		return element[index];
 	}
 
 
@@ -47,7 +48,7 @@ public class ArrayIndexList<E> implements IndexList<E> {
 	public E remove(int index) throws IndexOutOfBoundsException {
 		if(index < 0 || index > this.size())throw new IndexOutOfBoundsException("bruh");
 		E temp = element[index];
-		moveDataOnePositionTL(index,size);
+		moveDataOnePositionTL(index,size-1);
 		size--;
 		return temp;
 	}
@@ -55,7 +56,10 @@ public class ArrayIndexList<E> implements IndexList<E> {
 
 	public E set(int index, E e) throws IndexOutOfBoundsException {
 		// ADD AND MODIFY CODE AS REQUESTED BY EXERCISES
-		return null;
+		if(!isValid(index,size)) { throw new IndexOutOfBoundsException("Index is out of bound: " + index); }
+		E temp = element[index];
+		element[index] = e;
+		return temp;
 	}
 
 
@@ -100,14 +104,21 @@ public class ArrayIndexList<E> implements IndexList<E> {
 
 	// The following two methods are to be implemented as part of an exercise
 	public Object[] toArray() {
-		// TODO es in Exercise 3
-		return null;
+		Object[] arr = new Object[size];
+		for(int i = 0; i < size; i++) {
+			arr[i] = element[i];
+		}
+		return arr;
+	}
+	
+	private boolean isValid(int index , int size) {
+		if(index < 0 || index > size) { return false; }
+		return true;
 	}
 
 
 	@Override
 	public <T1> T1[] toArray(T1[] array) {
-		// TODO as in Exercise 3
 		return null;
 	}
 
