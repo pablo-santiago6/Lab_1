@@ -3,9 +3,9 @@ package arrayIndexList;
 import indexList.IndexList;
 
 public class ArrayIndexList<E> implements IndexList<E> {
-	private static final int INITCAP = 5; 
-	private static final int CAPTOAR = 5; 
-	private static final int MAXEMPTYPOS = 10; 
+	private static final int INITCAP = 1; 
+	private static final int CAPTOAR = 1; 
+	private static final int MAXEMPTYPOS = 2; 
 	private E[] element; 
 	private int size; 
 
@@ -17,18 +17,19 @@ public class ArrayIndexList<E> implements IndexList<E> {
 
 	public void add(int index, E e) throws IndexOutOfBoundsException {
 		if(!isValid(index,size)) { throw new IndexOutOfBoundsException("Index is out of bound: " + index); }
+		if(size + 1 > element.length){ changeCapacity(CAPTOAR); }
 		
-		
-		moveDataOnePositionTR(index+1,size);
-		element[index] = e;
 		size++;
+		if(capacity()> 1)moveDataOnePositionTR(index,size-2);
+		element[index] = e;
+		
 		
 		
 	}
 
 
 	public void add(E e) {
-		if(size + 1 > element.length){ changeCapacity(element.length); }
+		if(size + 1 > element.length){ changeCapacity(CAPTOAR); }
 		
 		element[size] = e;  
 		size++;
@@ -46,7 +47,8 @@ public class ArrayIndexList<E> implements IndexList<E> {
 
 
 	public E remove(int index) throws IndexOutOfBoundsException {
-		if(index < 0 || index > this.size())throw new IndexOutOfBoundsException("bruh");
+		if(index < 0 || index > this.size())throw new IndexOutOfBoundsException("Index is out of bound: " + index);
+		if(element.length - (size - 1) >=  MAXEMPTYPOS) { changeCapacity(-CAPTOAR); }
 		E temp = element[index];
 		size--;
 		moveDataOnePositionTL(index+1,size);
@@ -119,7 +121,14 @@ public class ArrayIndexList<E> implements IndexList<E> {
 
 	@Override
 	public <T1> T1[] toArray(T1[] array) {
-		return null;
+		return array;
+		
+	}
+
+
+	@Override
+	public int capacity() {
+		return element.length;
 	}
 
 }

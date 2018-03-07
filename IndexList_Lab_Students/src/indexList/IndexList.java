@@ -59,7 +59,8 @@ public interface IndexList<T> {
 	Object[] toArray(); 
 	<T1> T1[] toArray(T1[] array);
 
-	
-	// int capacity(); 
+	/** Returns the capacity of the IndexList at the moment 
+	 */
+	 int capacity(); 
 
 }
