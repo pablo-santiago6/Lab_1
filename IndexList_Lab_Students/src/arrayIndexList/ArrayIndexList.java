@@ -16,11 +16,11 @@ public class ArrayIndexList<E> implements IndexList<E> {
 	
 
 	public void add(int index, E e) throws IndexOutOfBoundsException {
-		if(!isValid(index,size)) { throw new IndexOutOfBoundsException("Index out of bounds!!"); }
+		if(!isValid(index,size)) { throw new IndexOutOfBoundsException("Index is out of bound: " + index); }
+		
 		
 		moveDataOnePositionTR(index+1,size);
 		element[index] = e;
-		System.out.println("Here is "+ element[index]);
 		size++;
 		
 		
