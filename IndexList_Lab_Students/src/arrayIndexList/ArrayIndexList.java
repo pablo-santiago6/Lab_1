@@ -18,7 +18,7 @@ public class ArrayIndexList<E> implements IndexList<E> {
 	public void add(int index, E e) throws IndexOutOfBoundsException {
 		if(!isValid(index,size)) { throw new IndexOutOfBoundsException("Index out of bounds!!"); }
 		
-		moveDataOnePositionTR(index,size);
+		moveDataOnePositionTR(index+1,size);
 		element[index] = e;
 		System.out.println("Here is "+ element[index]);
 		size++;
@@ -48,8 +48,8 @@ public class ArrayIndexList<E> implements IndexList<E> {
 	public E remove(int index) throws IndexOutOfBoundsException {
 		if(index < 0 || index > this.size())throw new IndexOutOfBoundsException("bruh");
 		E temp = element[index];
-		moveDataOnePositionTL(index,size-1);
 		size--;
+		moveDataOnePositionTL(index+1,size);
 		return temp;
 	}
 
