@@ -19,7 +19,7 @@ public class ArrayIndexList<E> implements IndexList<E> {
 		if(!isValid(index,size)) { throw new IndexOutOfBoundsException("Index is out of bound: " + index); }
 		if(size + 1 > element.length){ changeCapacity(CAPTOAR); }
 		
-		size++;
+		size++; 
 		if(capacity()> 1)moveDataOnePositionTR(index,size-2);
 		element[index] = e;
 		
