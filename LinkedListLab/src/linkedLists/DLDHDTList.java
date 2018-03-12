@@ -3,15 +3,17 @@ package linkedLists;
 import java.util.NoSuchElementException;
 
 public class DLDHDTList<E> extends AbstractDLList<E> {
-	private DNode<E> header, trailer; 
+	private DNode<E> header, trailer;
 	private int length; 
 	
 	public DLDHDTList() { 
-		// ADD CODE HERE to generate empty linked list of this type 
+		header = new DNode<>(null,null,null);
+		trailer = new DNode<>(null, header , null);
+		header.setNext(trailer);
 	}
 	
 	public void addFirstNode(Node<E> nuevo) {
-		addNodeAfter(header, nuevo); 
+		addNodeAfter(header, nuevo);
 	}
 	
 	public void addLastNode(Node<E> nuevo) { 
@@ -36,7 +38,11 @@ public class DLDHDTList<E> extends AbstractDLList<E> {
 	}
 
 	public void addNodeBefore(Node<E> target, Node<E> nuevo) {
-		// ADD CODE HERE
+        DNode<E> dnuevo = (DNode<E>) nuevo;
+        DNode<E> nBefore = (DNode<E>) target;
+        nBefore.getPrev().setNext(dnuevo);
+        dnuevo.setNext(nBefore);
+        length++;
 	}
 
 	public Node<E> createNewNode() {
@@ -57,14 +63,18 @@ public class DLDHDTList<E> extends AbstractDLList<E> {
 
 	public Node<E> getNodeAfter(Node<E> target)
 			throws NoSuchElementException {
-		// ADD CODE HERE AND MODIFY RETURN ACCORDINGLY
-		return null; 
+	    DNode<E> temp = ((DNode<E>)this.getFirstNode());
+	    DNode<E> dtarget = ((DNode<E>)target);
+	    if(dtarget == getLastNode()){ throw new NoSuchElementException("Element does not exist , node is the last"); }
+	    else return dtarget.getNext();
+
 	}
 
 	public Node<E> getNodeBefore(Node<E> target)
 			throws NoSuchElementException {
-		// ADD CODE HERE AND MODIFY RETURN ACCORDINGLY
-		return null; 
+		if(target == getFirstNode()){ throw new NoSuchElementException("Node does not have a Node before"); }
+		else return ((DNode<E>)target).getPrev();
+
 	}
 
 	public int length() {
@@ -73,6 +83,17 @@ public class DLDHDTList<E> extends AbstractDLList<E> {
 
 	public void removeNode(Node<E> target) {
 		// ADD CODE HERE to disconnect target from the linked list, reduce lent, clean target...
+        if(target == getLastNode()) ((DNode<E>) target).getPrev().setNext(null);
+        else if(target == getFirstNode()) ((DNode<E>) target).getNext().setPrev(null);
+        else {
+            ((DNode<E>)target).getPrev().setNext(((DNode<E>)target).getNext());
+            ((DNode<E>)target).getNext().setPrev(((DNode<E>)target).getPrev());
+        }
+        ((DNode<E>) target).setNext(null);
+        ((DNode<E>) target).setPrev(null);
+        ((DNode<E>) target).clean();
+        length--;
+
 	}
 	
 	/**
