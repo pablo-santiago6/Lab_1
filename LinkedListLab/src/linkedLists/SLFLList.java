@@ -10,6 +10,7 @@ package linkedLists;
 import java.util.NoSuchElementException;
 
 import linkedLists.LinkedList;
+import linkedLists.AbstractSLList.SNode;
 
 public class SLFLList<E> extends SLList<E>
 {
@@ -23,53 +24,76 @@ public class SLFLList<E> extends SLList<E>
 	
 	
 	public void addFirstNode(Node<E> nuevo) {
-		// TODO Auto-generated method stub
+		length++;
+		first = (SNode<E>) nuevo;
+		last = first;
 		
 	}
 
 	public void addNodeAfter(Node<E> target, Node<E> nuevo) {
-		// TODO Auto-generated method stub
-		
+		length++;
+		if(target == last){ last = ((SNode<E>)nuevo); }
+		((SNode<E>)nuevo).setNext(((SNode<E>)target).getNext());
+		((SNode<E>)target).setNext((SNode<E>) nuevo);
 	}
 
 	public void addNodeBefore(Node<E> target, Node<E> nuevo) {
-		// TODO Auto-generated method stub
-		
+		((SNode<E>)findNodePrevTo(target)).setNext(((SNode<E>)nuevo));
+		((SNode<E>)nuevo).setNext(((SNode<E>)target));
 	}
 
 	public Node<E> getFirstNode() throws NoSuchElementException {
-		// TODO Auto-generated method stub
-		return null;
+		return this.first;
 	}
 
 	public Node<E> getLastNode() throws NoSuchElementException {
-		// TODO Auto-generated method stub
-		return null;
+		return this.last;
 	}
 
 	public Node<E> getNodeAfter(Node<E> target) throws NoSuchElementException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Node<E> next = ((SNode<E>)target).getNext();
+		if(next == null){
+			throw new NoSuchElementException("This node is the last node");
+		}
+		else{
+			return next;
+		}
 	}
 
 	public Node<E> getNodeBefore(Node<E> target)
 			throws NoSuchElementException {
-		// TODO Auto-generated method stub
-		return null;
+		Node<E> prev = findNodePrevTo(target);
+		if(prev == null) throw new NoSuchElementException("this node is the first one");
+		else{
+			return prev;
+		}
 	}
 
 	public int length() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.length;
 	}
 
 	public void removeNode(Node<E> target) {
-		// TODO Auto-generated method stub
+		if(target == last){ last = (SNode<E>)findNodePrevTo(target); }
+		((SNode<E>)findNodePrevTo(target)).setNext(((SNode<E>)target).getNext());
+		length--;
+		target = null;
 		
 	}
 	
 	public Node<E> createNewNode() {
 		return new SNode<E>();
+	}
+	
+	private Node<E> findNodePrevTo(Node<E> target){
+		if(target == first){ return null;}
+		else { 
+			SNode<E> prev = first; 
+			while (prev != null && prev.getNext() != target) 
+				prev = prev.getNext();  
+			return prev; 
+		}
 	}
 
 }
