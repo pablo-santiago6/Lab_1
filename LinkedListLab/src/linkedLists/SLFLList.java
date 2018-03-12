@@ -24,17 +24,16 @@ public class SLFLList<E> extends SLList<E>
 	
 	
 	public void addFirstNode(Node<E> nuevo) {
-		length++;
-		first = (SNode<E>) nuevo;
 		last = first;
-		
-	}
+        ((SNode<E>) nuevo).setNext(last);
+        first = (SNode<E>) nuevo;
+        length++;
+    }
 
 	public void addNodeAfter(Node<E> target, Node<E> nuevo) {
-		length++;
-		if(target == last){ last = ((SNode<E>)nuevo); }
-		((SNode<E>)nuevo).setNext(((SNode<E>)target).getNext());
-		((SNode<E>)target).setNext((SNode<E>) nuevo);
+	    if(!(target == getLastNode())){ ((SNode<E>)nuevo).setNext(((SNode<E>)target).getNext()); }
+        ((SNode<E>)target).setNext(((SNode<E>)nuevo));
+	    length++;
 	}
 
 	public void addNodeBefore(Node<E> target, Node<E> nuevo) {
@@ -75,11 +74,15 @@ public class SLFLList<E> extends SLList<E>
 	}
 
 	public void removeNode(Node<E> target) {
-		if(target == last){ last = (SNode<E>)findNodePrevTo(target); }
-		((SNode<E>)findNodePrevTo(target)).setNext(((SNode<E>)target).getNext());
-		length--;
-		target = null;
-		
+        if(target == first){first = ((SNode<E>)target).getNext();}
+        else if(target == last){ last = ((SNode<E>)(findNodePrevTo(target))); }
+        else{
+            ((SNode<E>)findNodePrevTo(target)).setNext(((SNode<E>)target).getNext());
+        }
+        target.setElement(null);
+        ((SNode<E>)target).setNext(null);
+        length--;
+
 	}
 	
 	public Node<E> createNewNode() {
@@ -95,5 +98,15 @@ public class SLFLList<E> extends SLList<E>
 			return prev; 
 		}
 	}
+
+    public Object[] toArray() {
+        SNode<E> temp = ((SNode)getLastNode());
+        Object[] arr = new Object[length()];
+        for(int i = length() - 1; i > 0; i--) {
+            arr[i] = temp;
+            temp = temp.getNext();
+        }
+        return arr;
+    }
 
 }
