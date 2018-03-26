@@ -1,5 +1,5 @@
 package sorterClasses;
 
-public class combSorter {
+public class combSorter{
 
 }
