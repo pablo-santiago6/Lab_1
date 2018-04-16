@@ -7,6 +7,7 @@ public class BubbleSortSorter<E> extends AbstractMaxValueSorter<E> {
 	}
 
 	@Override
+	//when the list is backwards
 	protected void relocateMaxValueToLastPositionAmongFirst(int i) {
 		// pre: 1 < i < arr.length
 		for (int j=0; j < i-1; j++) 

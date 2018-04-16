@@ -11,9 +11,39 @@ public class SymmetricStringAnalyzer {
 	 * @return true if it is; false, otherwise. 
 	 */
 	public boolean isValidContent() { 
-		// ADD MISSING CODE
+		if(s.length() == 0) { return true; }
+		SLLStack<Character> stack1 = new SLLStack<>();
 		
-		return true;  // need to change if necessary....
+		for(int i = 0; i< s.length();i++){
+		
+			char c = (s.charAt(i));
+			
+			if(Character.isLetter(c)){
+			
+				if(Character.isUpperCase(c)){
+				
+					stack1.push(c);
+				}
+				
+				else if(stack1.isEmpty()) {
+					return false;
+				}
+				
+				else{
+					char t = stack1.top();
+					if(t == Character.toUpperCase(c))stack1.pop();
+					else return false;
+				}
+			}
+			else{
+				return false;
+			}
+		}
+		if(stack1.isEmpty())return true;
+		else{
+			if(stack1.top() == Character.toUpperCase(s.charAt(s.length()-1)))return true;
+		}
+		return false;
 	}
 	
 	public String toString() { 
@@ -23,9 +53,13 @@ public class SymmetricStringAnalyzer {
 	public String parenthesizedExpression() 
 	throws StringIsNotSymmetricException 
 	{
-		// ADD MISSING CODE
-		
-		return null;  // need to change if necessary....
+		if(!this.isValidContent())return null;
+		String result = new String();
+		for(int i = 0; i < s.length();i++){
+			if(Character.isUpperCase(s.charAt(i))) result+=("<"+s.charAt(i)+"\t");
+			else result+=(s.charAt(i)+">"+"\t");
+		}
+		return result;
 	}
 
 }

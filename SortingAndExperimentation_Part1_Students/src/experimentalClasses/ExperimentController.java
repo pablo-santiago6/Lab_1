@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.Map;
 
 import dataGenerator.DataGenerator;
 
