@@ -1,6 +1,0 @@
-import java.util.Queue;
-
-public class MAIN {
-	
-	Queue<Integer> line = new Queue<Integer>();
-}

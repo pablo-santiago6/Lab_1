@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class MAIN {
+	public static void main(String args[]){
+		Scanner sc = new Scanner(System.in);
+		int input = sc.nextInt();
+		System.out.println(fibo(input)[0]);
+	}
+	
+	public static int[] fibo(int input){
+		int[] ans;
+		if(input <= 1){
+			ans = new int[] {input,0}; return ans;
+		}
+		else{
+			int oneDown[] = fibo(input -1);
+			ans = new int[] {oneDown[0] + oneDown[1],oneDown[1]};
+			return ans;
+		}
+	}
+}

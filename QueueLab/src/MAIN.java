@@ -47,7 +47,7 @@ public class MAIN {
 	
 		double sumOfTimes = 0.0;
 		
-		for(int i = 0;i <= terminatedJobs.size();i++){
+		for(int i = 0;i < terminatedJobs.size();i++){
 			sumOfTimes += terminatedJobs.get(i)[0];
 		}
 		double result = sumOfTimes/(terminatedJobs.size());

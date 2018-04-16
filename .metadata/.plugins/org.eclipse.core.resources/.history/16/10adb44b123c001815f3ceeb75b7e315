@@ -1,0 +1,15 @@
+import java.util.Scanner;
+
+public class MAIN {
+	public static void main(String args[]){
+	Scanner sc = new Scanner(System.in);
+	
+	int cubes = sc.nextInt();
+	System.out.println(ladder(cubes));
+	}
+	
+	public static int ladder(int cubes){
+		if(cubes == 1)return 1;
+		else return ladder(cubes -1);
+	}
+}

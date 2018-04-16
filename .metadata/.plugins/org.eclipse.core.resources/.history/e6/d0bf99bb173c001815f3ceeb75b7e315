@@ -1,0 +1,16 @@
+import java.util.Scanner;
+
+public class MAIN {
+	public static void main(String args[]){
+		Scanner sc = new Scanner(System.in);
+		int input = sc.nextInt();
+		String ans = po2(input);
+		System.out.println(ans);
+	}
+	
+	public static String po2(int input){
+		if((input/ 2)==2)return "Yes";
+		else if(input>2)return po2(input/2);
+		return "No";
+	}
+}
