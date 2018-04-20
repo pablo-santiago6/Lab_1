@@ -66,9 +66,18 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 		try { 
 			DNode<E> dp = (DNode<E>) p; 
 			if (dp.getPrev() == null || dp.getNext() == null) 
-				throw new IllegalArgumentException("Invalid internal node."); 
-			
-			return dp; 
+				throw new IllegalArgumentException("Invalid internal node.");
+
+			boolean isIn = false;
+            DNode<E> f = header;
+			while( f != null){
+                if(p.equals(f)){
+                    isIn = true;break;
+                }
+                f = f.getNext();
+            }
+            if(!isIn) throw  new IllegalArgumentException("Invalid Internal Node");
+			return dp;
 		} catch (ClassCastException e) { 
 			throw new IllegalArgumentException("Invalid position type."); 
 		}
@@ -131,7 +140,7 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
 	@Override
 	public Position<E> addBefore(Position<E> p, E e)
 			throws IllegalArgumentException {
-		DNode<E> dp = validate(p); 
+		DNode<E> dp = validate(p);
 		return addBetween(dp.getPrev(), dp, e);
 	}
 
